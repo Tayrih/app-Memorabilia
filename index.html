@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Memorabilia</title>
+  <link rel="stylesheet" href="vendors/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <!-- LOGIN MODULE -->
+  <div class="main light-green lighten-5" id="page">
+    <div class="row cyan darken-1 z-depth-5">
+      <div class="navbar-fixed">
+        <nav class="row cyan darken-1 z-depth-0">
+          <div class="nav-wrapper">
+            <div class="container">
+              <div class="row">
+                <div class="col s12">
+                  <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">collections_bookmark</i></a>
+                  <a href="#" class="brand-logo" target="_blank">Memorabilia Social</a>
+                  <ul class="right hide-on-med-and-down">
+                    <li><a href="#" target="_blank">
+                          <i class="material-icons">account_circle</i>
+                        </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="#" target="_blank">Sass</a></li>
+                <li><a href="#" target="_blank">Components</a></li>
+                <li><a href="#" target="_blank">Javascript</a></li>
+                <li><a href="#" target="_blank">Mobile</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container">
+        <div class="col s12 m4 section">
+          <div  class="profile z-depth-4">
+            <div class="profile-div">
+              <div class="profile-data">
+                <div id="avatar" class="col m6 s12">
+                  <img class="responsive-img" src="assets/images/user_circle.png">
+                    <div class="center-align" id="username">
+                    USERNAME
+                  </div>
+                </div>
+                <div id="info-user" class="col m6 s12">
+                  <div class="col s4 m12"># Colecciones</div>
+                  <div class="col s4 m12">### Amigos</div>
+                  <div class="col s4 m12"># Seguidores</div>
+                </div>
+                <div id="post">
+                  <form>
+                    <div class="row bottom-0">
+                      <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea light-green lighten-5" ></textarea>
+                        <label for="textarea1">¿Piensas en algo?</label>
+                      </div>
+                      <div class="col s3"><i class="material-icons">image</i></div>
+                      <div class="col s3"><i class="material-icons">movie</i></div>
+                      <div class="col s6">
+                        <button class="waves-effect waves-light btn">
+                          <i class="material-icons left">spellcheck</i>
+                          send
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>           
+          </div>
+          <div class="blue-grey chat z-depth-4">
+            <div class="chat-box">
+              <ul class="collection">
+                <li class="collection-item avatar">
+                  <img src="img/user_circle.png" alt="" class="circle">
+                  <span class="title">Title</span>
+                  <a href="#!" class="secondary-content"><i class="material-icons">message</i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="material-icons circle green">insert_chart</i>
+                  <span class="title">Title</span>
+                  <a href="#!" class="secondary-content"><i class="material-icons">message</i></a>
+                </li>
+                <li class="collection-item avatar">
+                  <i class="material-icons circle red">play_arrow</i>
+                  <span class="title">Title</span>
+                  <a href="#!" class="secondary-content"><i class="material-icons">message</i></a>
+                </li>
+              </ul>
+              <div class="row bottom-0" id="chat">
+                <form class="col s12">
+                  <div class="row bottom-0">
+                    <div class="input-field col s12 bottom-0">
+                      <i class="material-icons prefix">search</i>
+                      <input id="icon_prefix" type="text" class="validate">
+                      <label for="icon_prefix">Buscar</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <div class="col s12 m8 section">
+            <div class="section-news z-depth-4">
+              <div class="news-box">
+                NOTICIAS
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br>
+                </br></br>
+                </br>
+                </br>
+                </br></br>
+                </br>
+                </br>
+                </br></br>
+                </br>
+                </br>
+                </br>
+                </br>
+              </div>
+              
+            </div>
+          
+        </div>  
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="vendors/materialize/js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script type="text/javascript" src="./js/data.js"></script>
+  <script type="text/javascript" src="./js/app.js"></script>
+</body>
+
+</html>
