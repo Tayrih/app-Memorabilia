@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Memorabilia</title>
+  <link rel="stylesheet" href="vendors/materialize/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <!-- LOGIN MODULE -->
+  <div class="login cyan darken-1" id="page">
+    <div class="container">
+      <div class="row">
+      </div>
+      <div class="row">
+        <div class="col s12 m6 teal accent-2">
+          <!-- LOGO -->
+          <!--<div class="logo"></div>-->
+          <!-- RECOVERY -->
+          <!--<div class="recovery">
+            <h2>Password Recovery</h2>
+            <p>Ingrese su <strong>email </strong> o <strong>usuario</strong> de su cuenta</p>
+            <p>Le enviaremos un correo, con las instrucciones a seguir</p>
+            <form class="recovery-form" action="" method="post">
+              <input type="text" class="input" id="user_recover" placeholder="Ingrese su email o usuario">
+              <input type="submit" class="btn" value="Submit">
+            </form>
+            <p class="mssg">Se le envió un correo electrónico con las instracciones</p>
+          </div>-->
+          <!-- SLIDESHOW -->
+          <div id="slideshow">
+            <div class="one">
+              <h2><span>EVENTOS</span></h2>
+              <p>Regístrate y asiste a grandes eventos de coleccionismo en el mundo</p>
+            </div>
+            <div class="two">
+              <h2><span>GRUPOS</span></h2>
+              <p>Crea tus propios grupos y conéctate con otros que comparten tus intereses</p>
+            </div>
+            <div class="three">
+              <h2><span>COMPARTE</span></h2>
+              <p>Comparte tu pasión por el coleccionismo con el mundo</p>
+            </div>
+
+          </div>
+        </div>
+        <!-- LOGIN FORM -->
+        <div class="col s12 m6 user z-depth-5">
+          <div class="row"></div>
+          <div class="row"></div>
+          <div class="row"></div>
+          <div class="row">
+            <div class="form-wrap col s12">
+              <!-- TABS -->
+              <div class="tblas">
+                <h3 class="login-tab"><a class="log-in active" href="#login-tab-content">
+                <i class="material-icons md-48">account_circle</i>
+                <span>Login</span></a></h3>
+              </div>
+            </div>
+            <div class="form-wrap col s12">
+              <!-- TABS CONTENT -->
+              <div class="tabs-content">
+                <!-- TABS CONTENT LOGIN -->
+                <div id="login-tab-content" class="active">
+                  <form class="login-form" action="" method="post">
+                    <div class="col s12">
+                      <a class="btn waves-effect waves-light col s12 z-depth-5 blue" href="#" role="button" id="btn-fb">
+                      <i class="material-icons">filter_vintage</i>
+                      Con Facebook
+                      </a>
+                    </div>
+                    <div class="row"></div>
+                    <div class="col s12">
+                      <a class="btn waves-effect waves-light col s12 z-depth-5 red" href="#" id="btn-google" role="button">
+                      <i class="material-icons">filter_vintage</i>
+                      Con Google</a>
+                    </div>
+                  </form>
+                  <div class="row"></div>
+                  <div class="help-action col s12">
+                    <p><a class="forgot col s6 offset-s6" href="#">Forgot your password?</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-2">
+    <span id="well"></span>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="vendors/materialize/js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script type="text/javascript" src="./js/data.js"></script>
+  <script type="text/javascript" src="./js/app.js"></script>
+</body>
+
+</html>
