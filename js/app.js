@@ -68,7 +68,7 @@ $(document).ready(function() {
   btnSend.on('click', function() {
     var name = nameUserChat.val();
     var msg = valTextChat.val();
-    
+
     firebase.database().ref('chat').push({
       name: name,
       message: msg
@@ -92,3 +92,14 @@ $(document).ready(function() {
     });
   });
 });
+
+( function() {
+
+	$('#btn-search').on('click', function(e) {
+
+		e.preventDefault();
+		$('#search').animate({width: 'toggle'}).focus();
+
+	});
+
+} () );
