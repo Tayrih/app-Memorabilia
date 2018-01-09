@@ -61,5 +61,4 @@ $(document).ready(function() {
 
   $('#btn-google').on('click', loginGoogle);
   $('#btn-fb').on('click', loginFacebook);
-
 });

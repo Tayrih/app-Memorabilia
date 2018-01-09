@@ -17,12 +17,12 @@ function initFirebase() {
       var displayName = user.displayName;
       var userPhoto = user.photoURL;
       var pName = $('</p>', {
-              'class': 'black',
-            });
+        'class': 'black',
+      });
       var imgU = $('<img>', {
-              'class': 'responsive-img',
-              'src': userPhoto
-            });
+        'class': 'responsive-img',
+        'src': userPhoto
+      });
       pName.append(displayName);
       userName.append(pName);
       userImg.append(imgU);
@@ -70,7 +70,7 @@ $(document).ready(function() {
     });
   });
 
-  // cerrar sesión 
+  // cerrar sesión
 
   $('#sign-out').on('click', function() {
     firebase.auth().signOut().then(function() {
@@ -81,13 +81,9 @@ $(document).ready(function() {
   });
 });
 
-( function() {
-
-	$('#btn-search').on('click', function(e) {
-
-		e.preventDefault();
-		$('#search').animate({width: 'toggle'}).focus();
-
-	});
-
-} () );
+(function() {
+  $('#btn-search').on('click', function(elm) {
+    elm.preventDefault();
+    $('#search').animate({width: 'toggle'}).focus();
+  });
+}());
