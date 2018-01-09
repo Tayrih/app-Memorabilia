@@ -6,7 +6,7 @@ function redirectLogin() {
     if (user) {
       initFirebase();
     } else {
-      window.location.href = '../login.html';
+      window.location.href = '../views/login.html';
     }
   });
 }

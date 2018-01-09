@@ -1,7 +1,7 @@
 $(function() {
   $('#slideshow > div:gt(0)').hide();
   setInterval(function() {
-    $('#slideshow > div:first').fadeOut(1500).next().fadeIn(1500).end().appendTo('#slideshow');
+    $('#slideshow > div:first').fadeOut(1000).next().fadeIn(1000).end().appendTo('#slideshow');
   }, 3850);
 });
 
@@ -56,7 +56,7 @@ $(document).ready(function() {
   }
 
   function signOut() {
-    window.location.href = '../login.html';
+    window.location.href = '../views/login.html';
   }
 
   $('#btn-google').on('click', loginGoogle);
