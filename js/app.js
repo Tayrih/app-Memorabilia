@@ -28,12 +28,12 @@ function initFirebase() {
 
       if (userPhoto) {
         var imgU = $('<img>', {
-          'class': 'responsive-img',
+          'class': 'responsive-img circle user',
           'src': userPhoto
         });
       } else {
         var imgU = $('<img>', {
-          'class': 'responsive-img',
+          'class': 'responsive-img circle user',
           'src': '../assets/images/user_circle.png'
         });
       }
@@ -176,5 +176,17 @@ $(document).ready(function() {
     firebase.database().ref('/state').set({
       message: valText
     });
+  });
+  $('#home').on('click', function() {
+    window.location.href = '../index.html';
+  });
+
+  $('#profile').on('click', function() {
+    window.location.href = 'views/perfil.html';
+  });
+
+
+  $(function() {
+    $('.button-collapse').sideNav();
   });
 });

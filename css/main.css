@@ -72,26 +72,48 @@ body {
 .news-box {
   background-color: white;
   padding: 8px;
+  color: white;
+}
+
+.color-box {
+  color: white;
 }
 
 /* datos basicos-perfil */
 
 .contenedor {
-	width: 80%;
-	margin: 50px auto;
-	display: flex;
-	flex-wrap: wrap;
+  width: 80%;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 20px;
 }
+
 img {
   width: 200px;
 }
+
 .center {
   background: yellow;
 }
+
 .card {
   margin: 4px;
 }
-/* .info-user {
-  color :#000;
-} */
+
+div#user-name p {
+  font-size: 23px;
+}
+
+div#user-name {
+  padding-top: 10%;
+}
+
+@media only screen and (min-width: 992px) {
+  div#user-name p {
+    font-size: 19px;
+  }
+  div#user-name {
+    padding-top: 5%;
+  }
+}
