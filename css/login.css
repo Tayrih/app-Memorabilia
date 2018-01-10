@@ -16,7 +16,7 @@
   align-items: stretch;
 }
 
-.user {
+.login-user {
   height: 90vh;
   border-top: 3px solid var(--color1);
   border-right: 3px solid var(--color1);

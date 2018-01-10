@@ -100,3 +100,15 @@ body {
 .content {
   display: flex;
 }
+
+.color-textarea {
+  color: #44cbce;
+}
+
+/*index*/
+
+@media only screen and (max-width: 600px) {
+  .user-photo {
+    width: 50%;
+  }
+}
