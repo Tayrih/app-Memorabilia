@@ -74,47 +74,24 @@ body {
   padding: 8px;
 }
 
-/* datos basicos */
+/* datos basicos-perfil */
 
-.data-row .data-name {
-  width: 12em;
-  color: #fff;
-  background-color: #ff766c;
-  border-color: #4cae4c;
-  font-size: 0.9em;
-  vertical-align: top;
+.contenedor {
+	width: 80%;
+	margin: 50px auto;
+	display: flex;
+	flex-wrap: wrap;
+  margin-top: 20px;
 }
-
-.user {
-  height: 100px;
+img {
   width: 200px;
-  padding: 10px;
 }
-
-.views {
-  margin: 5px;
-  color: #000;
+.center {
+  background: yellow;
 }
-
-.content {
-  display: flex;
+.card {
+  margin: 4px;
 }
-
-.color-textarea {
-  color: #44cbce;
-  padding: 5px;
-}
-
-.textarea#textarea {
-  padding: 0 5px;
-}
-
-/*index*/
-
-@media only screen and (max-width: 600px) {
-  .user-photo {
-    width: 50%;
-  }
-}
-
-/*********** CHAT *************/
+/* .info-user {
+  color :#000;
+} */

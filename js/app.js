@@ -178,10 +178,3 @@ $(document).ready(function() {
     });
   });
 });
-
-(function() {
-  $('#btn-search').on('click', function(elm) {
-    elm.preventDefault();
-    $('#search').animate({width: 'toggle'}).focus();
-  });
-}());

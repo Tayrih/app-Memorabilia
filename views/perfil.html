@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,46 +9,57 @@
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Poppins" rel="stylesheet">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome"> -->
   <link rel="stylesheet" href="../vendors/materialize/css/materialize.min.css">
   <link rel="stylesheet" href="../css/main.css">
   <title>Perfil</title>
 </head>
+
 <body>
   <header>
     <div class="navbar-fixed">
-      <nav class="purple accent-2">
+      <nav class=" cyan darken-1">
         <div class="nav-wrapper">
           <a href="#" class="brand-logo font">Memorabilia</a>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <li><a href="#">Home</a></li>
-            <li><a href="badges.html">Notifications<i class="material-icons"></i></a></li>
-            <li><a href="collapsible.html">My collection</a></li>
+            <li><a href="#info-user">Home</a></li>
+            <li><a href="#following">Notifications</a></li>
+            <li><a href="#myCollection">My collection</a></li>
           </ul>
           <ul class="side-nav" id="mobile-demo">
-            <li><a href="#"></a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+            <div class="user-view">
+              <div class="background">
+                <img src="../assets/images/fonfo2.jpg">
+              </div>
+              <div class="info">
+                <a href="#!user"><img class="circle info" src="../assets/images/user.jpg"></a>
+                <a href="#!name"><span class="black-text name">Camila Miranda</span></a>
+                <a href="#!email"><span class="black-text email">CamilaMi@gmail.com</span></a>
+              </div>
+            </div>
+            <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
+            <li><a href="index.html"><i class="material-icons">notifications_active</i>Notifications</a></li>
+            <li><a href="#myCollection"><i class="material-icons">collections</i>My Collection</a></li>
           </ul>
         </div>
       </nav>
     </div>
   </header>
-  <section>
+  <section id="info-user">
     <div class="container">
-      <div class ="row">
-        <div class="card-panel grey lighten-5 s12  l12">
+      <div class="row">
+        <div class="card-panel  cyan lighten-4 s12  l12">
           <div class="row valign-wrapper">
             <div class="col s5 l5">
-            <img src="../assets/images/user.jpg" alt="" class="circle responsive-img user"> <!-- notice the "circle" class -->
+              <img src="../assets/images/user.jpg" alt="" class="circle responsive-img user">
+              <!-- notice the "circle" class -->
             </div>
             <div class="col s12 l12">
-              <h5>Camila Miranda</h5>
-              <p>@CamiMi</p>
-                <a class="waves-effect pink accent-1">22.5k</a>
-                <a class="waves-effect pink accent-1">Following</a>
-                <a class="waves-effect pink accent-1">My Collection</a>
+              <h3>Camila Miranda</h3>
+              <p>CamilaMi@gmail.com</p>
+              <a href="#" class="waves-effect pink accent-1 deep-purple-text">22.5k</a>
+              <a href="#following" class="waves-effect pink accent-1  deep-purple-text">Following</a>
+              <a href="#myCollection" class="waves-effect pink accent-1 deep-purple-text">My Collection</a>
             </div>
           </div>
         </div>
@@ -57,91 +69,144 @@
   <section>
     <div class="contenedor">
       <div class="row">
+        <h4 id="myCollection" class="center yellow accent-2">My Collection</h4>
         <div class="col s12 m4 l3">
           <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator responsive-img" src="../assets/images/star-wars-legos.jpg">
-           </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">STAR WARS<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">STAR WARS<i class="material-icons right">close</i></span>
+              <p>Amamos STAR WARS.</p>
+            </div>
           </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+        </div>
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator responsive-img" src="../assets/images/naruto-collection.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">NARUTO-COLLECTION<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">NARUTO COLLECTION<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="../assets/images/ball-collection.JPG">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">FIFA-2018<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">FIFA-2018<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator responsive-img" src="../assets/images/barbie-duo.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">WE LOVE BARBIE<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">WE LOVE BARBIE<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col s12 m4 l3">
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator responsive-img" src="../assets/images/naruto-collection.jpg">
+    </div>
+  </section>
+  <section id="following">
+    <div class="contenedor">
+      <div class="row">
+        <h4 id="following" class="center">Following</h4>
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator responsive-img" src="../assets/images/group1.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">🎆Traveling 🎶<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">This is a link</a></p>
+        </div>
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image">
+              <img class="activator responsive-img" src="../assets/images/group3.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Super Family😎<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
-          <div class="card-reveal">
-           <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-           <p>Here is some more information about this product that is only revealed once clicked on.</p>
+        </div>
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="../assets/images/group4.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">CoMiCs<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4 l3">
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator responsive-img" src="../assets/images/group2.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">COsPlay<i class="material-icons right">more_vert</i></span>
+              <p><a href="#">This is a link</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col s12 m4 l3">
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="../assets/images/ball-collection.JPG">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-           <p><a href="#">This is a link</a></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col s12 m4 l3">
-        <div class="card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator responsive-img" src="../assets/images/barbie-duo.jpg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-            <p><a href="#">This is a link</a></p>
-          </div>
-        <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-      </div>
     </div>
-    </div>
-    <div class="col s12 m4 l3">
-      <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img class="activator responsive-img" src="../assets/images/barbie-duo.jpg">
-        </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-          <p><a href="#">This is a link</a></p>
-        </div>
-      <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-    </div>
-  </div>
-  </div>
-    </div>
-
-  </div>
-</section>
-
+  </section>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="vendors/materialize/js/materialize.min.js"></script>
+  <script type="text/javascript" src="../vendors/materialize/js/materialize.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script type="text/javascript" src="../js/data.js"></script>
-  <script type="text/javascript" src="../js/app.js"></script>
+  <!-- <script type="text/javascript" src="../js/data.js"></script> -->
+  <script type="text/javascript" src="../js/perfil.js"></script>
+  <!-- <script type="text/javascript" src="../js/app.js"></script> -->
 </body>
+
 </html>
