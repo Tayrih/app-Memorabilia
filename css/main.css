@@ -74,11 +74,24 @@ body {
   padding: 8px;
 }
 
-/* datos basicos */
+/* datos basicos-perfil */
 
 .contenedor {
 	width: 80%;
 	margin: 50px auto;
 	display: flex;
 	flex-wrap: wrap;
+  margin-top: 20px;
 }
+img {
+  width: 200px;
+}
+.center {
+  background: yellow;
+}
+.card {
+  margin: 4px;
+}
+/* .info-user {
+  color :#000;
+} */
