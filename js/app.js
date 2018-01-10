@@ -1,6 +1,9 @@
 // obtiene imagen y username
 var userName = $('#user-name');
 var userImg = $('#user-photo');
+var database = firebase.database();
+var userConect = null;
+
 function redirectLogin() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
@@ -19,15 +22,54 @@ function initFirebase() {
       var pName = $('</p>', {
         'class': 'black',
       });
-      var imgU = $('<img>', {
-        'class': 'responsive-img',
-        'src': userPhoto
-      });
+
       pName.append(displayName);
       userName.append(pName);
+
+      if (userPhoto) {
+        var imgU = $('<img>', {
+          'class': 'responsive-img',
+          'src': userPhoto
+        });
+      } else {
+        var imgU = $('<img>', {
+          'class': 'responsive-img',
+          'src': '../assets/images/user_circle.png'
+        });
+      }
+
       userImg.append(imgU);
+      userConect = database.ref('/user/' + user.uid);
+      // aca consultamos
+      console.log(userExist(user.uid));
+      if (!userExist(user.uid)) {
+        // conecto a la base de datos creo la referencia user y llamo a addUserDb
+        addUserDb(user.uid, user.displayName);
+      }
     }
   });
+}
+// obtiene uid y name
+function addUserDb(uid, name) {
+  var conect = userConect.set({
+    uid: uid,
+    name: name
+  });
+}
+
+function userExist(uid) {
+  var exist = false;
+  firebase.database().ref('user').on('value', function(snapshot) {
+    snapshot.forEach(function(elm) {
+      var element = elm.val();
+      console.log(element);
+      // esto lo estoy poniendo para comprobar si entra a tu base de datosse
+      if (element.uid === uid) {
+        exist = true;
+      }
+    });
+  });
+  return exist;
 }
 
 $(window).on('load', function() {
