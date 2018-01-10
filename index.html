@@ -8,6 +8,7 @@
   <title>Memorabilia</title>
   <link rel="stylesheet" href="vendors/materialize/css/materialize.min.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/chat.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Poppins" rel="stylesheet">
 </head>
@@ -25,7 +26,7 @@
                   <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">collections_bookmark</i></a>
                   <a href="#" class="brand-logo font" target="_blank">Memorabilia</a>
                   <ul class="right hide-on-med-and-down">
-                    <li><a href="#">
+                    <li><a>
                           <i class="material-icons" id="sign-out">vpn_key</i>
                         </a>
                     </li>
@@ -60,16 +61,12 @@
                   <form>
                     <div class="row bottom-0">
                       <div class="input-field col s12">
-                        <textarea id="textarea1" class="materialize-textarea light-green lighten-5 color-textarea"></textarea>
+                        <div id="contain-val-text"></div>
+                        <textarea id="textarea" class="col s12 materialize-textarea light-green lighten-5 color-textarea" value="text"></textarea>
                         <label for="textarea1 teal accent-4">¿Piensas en algo?</label>
                       </div>
-                      <div class="col s3"><i class="material-icons">image</i></div>
-                      <div class="col s3"><i class="material-icons">movie</i></div>
-                      <div class="col s6">
-                        <button class="waves-effect waves-light btn">
-                          <i class="material-icons left">spellcheck</i>
-                          send
-                        </button>
+                      <div class="col s12">
+                        <button class="waves-effect waves-light btn" id="bt-send-text">Guardar<i class="material-icons left">spellcheck</i></button>
                       </div>
                     </div>
                   </form>
@@ -112,7 +109,7 @@
         </div>
         <div class="col s12 m7 l8 section">
           <div class="section-news z-depth-4">
-            <div class="news-box">
+            <div class="news-box" id="news-box">
               NOTICIAS
               <br>
               <br>
@@ -141,16 +138,39 @@
             </div>
           </div>
         </div>
-        <div class="fixed-action-btn horizontal">
-          <a class="btn-floating btn-large red">
+        <!-- <div class="fixed-action-btn horizontal">
+          <a class="btn-floating btn-large cyan darken-2">
             <i class="large material-icons">mode_edit</i>
           </a>
           <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons teal accent-2">chat</i></a></li>
           </ul>
+        </div>
+        <div class="floating-chat">
+    <i class="fa fa-comments" aria-hidden="true"></i>
+
+</div>-->
+
+        <div class="fixed-action-btn horizontal">
+          <div class="cht cyan lighten-2">
+            <div class="cht_header">
+              <span id="cht_head">Live Chat</span>
+              <div class="cht_loader"></div>
+              <div class="cht_option"><i class="zmdi zmdi-more-vert"></i>
+                <div class="row" id="content-chat">
+                  <div class="col s12">
+                    <div id="content-msg">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cht_login">
+              <input id="cht_log_email" placeholder="Escribe un mensaje">
+              <a class="btn-large cyan darken-1" href="#" id="btn-send"><i class="material-icons">send</i></a>
+            </div>
+          </div>
+          <a id="prime" class="fab cyan lighten-2"><i class="large material-icons">mode_edit</i></a>
         </div>
       </div>
     </div>
