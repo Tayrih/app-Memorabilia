@@ -76,15 +76,37 @@ body {
 
 /* datos basicos */
 
-.contenedor {
-	width: 80%;
-	margin: 50px auto;
-	display: flex;
-	flex-wrap: wrap;
+.data-row .data-name {
+  width: 12em;
+  color: #fff;
+  background-color: #ff766c;
+  border-color: #4cae4c;
+  font-size: 0.9em;
+  vertical-align: top;
+}
+
+.user {
+  height: 100px;
+  width: 200px;
+  padding: 10px;
+}
+
+.views {
+  margin: 5px;
+  color: #000;
+}
+
+.content {
+  display: flex;
 }
 
 .color-textarea {
   color: #44cbce;
+  padding: 5px;
+}
+
+.textarea#textarea {
+  padding: 0 5px;
 }
 
 /*index*/
@@ -94,3 +116,5 @@ body {
     width: 50%;
   }
 }
+
+/*********** CHAT *************/

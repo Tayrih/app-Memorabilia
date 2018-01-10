@@ -40,8 +40,7 @@ function initFirebase() {
 
       userImg.append(imgU);
       userConect = database.ref('/user/' + user.uid);
-      // aca consultamos
-      console.log(userExist(user.uid));
+      // console.log(userExist(user.uid));
       if (!userExist(user.uid)) {
         // conecto a la base de datos creo la referencia user y llamo a addUserDb
         addUserDb(user.uid, user.displayName);
@@ -62,8 +61,7 @@ function userExist(uid) {
   firebase.database().ref('user').on('value', function(snapshot) {
     snapshot.forEach(function(elm) {
       var element = elm.val();
-      console.log(element);
-      // esto lo estoy poniendo para comprobar si entra a tu base de datosse
+      // console.log(element);
       if (element.uid === uid) {
         exist = true;
       }
@@ -77,19 +75,24 @@ $(window).on('load', function() {
 });
 
 $(document).ready(function() {
-  var nameUserChat = $('#name');
-  var valTextChat = $('#message');
+  // var nameUserChat = $('#name');
+  var valTextChat = $('#cht_log_email');
   var btnSend = $('#btn-send');
-  var contChat = $('#content-chat');
+  var contChat = $('#content-msg');
+  var contState = $('#contain-val-text');
   // mandar información a firebase para el chat
 
   btnSend.on('click', function() {
-    var name = nameUserChat.val();
-    var msg = valTextChat.val();
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        var name = user.displayName;
+        var msg = valTextChat.val();
 
-    firebase.database().ref('chat').push({
-      name: name,
-      message: msg
+        firebase.database().ref('chat').push({
+          name: name,
+          message: msg
+        });
+      }
     });
   });
 
@@ -102,16 +105,62 @@ $(document).ready(function() {
       var txtName = element.name;
       var txtMsg = element.message;
       var tName = $('<li/>', {
-      'class': 'li',
-            }).text(txtName + ': ');
-      var tMsg = $('<li/>', {
         'class': 'li',
-      }).text(txtMsg);
+      }).text(txtName + ': ' + txtMsg);
+
       contChat.append(tName);
-      contChat.append(tMsg);
+      $('#cht_log_email').val('');
+    });
+  });
+  // obtiene data para estados
+  var valTextState = $('#textarea');
+  $('#bt-send-text').on('click', function() {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        var state = valTextState.val();
+
+        firebase.database().ref('state').push({
+          message: state
+        });
+      }
     });
   });
 
+
+  firebase.database().ref('state').on('value', function(snapshot) {
+    var newBox = $('#news-box');
+    snapshot.forEach(function(elm) {
+      var element = elm.val();
+      var stateUser = element.stateU;
+      var sUser = $('<p/>', {
+        'class': 'li',
+      }).append(stateUser);
+
+      newBox.append(sUser);
+    });
+  });
+
+  toggleFab();
+
+  // Fab click
+  $('#prime').click(function() {
+    toggleFab();
+  });
+
+  // Toggle chat and links
+  function toggleFab() {
+    $('.prime').toggleClass('zmdi-plus');
+    $('.prime').toggleClass('zmdi-close');
+    $('.prime').toggleClass('is-active');
+    $('#prime').toggleClass('is-float');
+    $('.cht').toggleClass('is-visible');
+    $('.fab').toggleClass('is-visible');
+  }
+
+  // Loader effect
+  function loadBeat(beat) {
+    beat ? $('.cht_loader').addClass('is-loading') : $('.cht_loader').removeClass('is-loading');
+  }
   // cerrar sesión
 
   $('#sign-out').on('click', function() {
@@ -121,11 +170,18 @@ $(document).ready(function() {
       console.log('error');
     });
   });
+  // boton para estados, guarda en firebase
+  $('#bt-send-text').on('click', function() {
+    var valText = $('#textarea').val();
+    firebase.database().ref('/state').set({
+      message: valText
+    });
+  });
 });
 
-} () );
-$(document).ready(function() {
-       function DropDownMenu() {
-        $('.dropdown-button').dropdown();
-      }
-    });
+(function() {
+  $('#btn-search').on('click', function(elm) {
+    elm.preventDefault();
+    $('#search').animate({width: 'toggle'}).focus();
+  });
+}());
