@@ -102,8 +102,8 @@ $(document).ready(function() {
       var txtName = element.name;
       var txtMsg = element.message;
       var tName = $('<li/>', {
-        'class': 'li',
-      }).text(txtName + ': ');
+      'class': 'li',
+            }).text(txtName + ': ');
       var tMsg = $('<li/>', {
         'class': 'li',
       }).text(txtMsg);
@@ -123,9 +123,9 @@ $(document).ready(function() {
   });
 });
 
-(function() {
-  $('#btn-search').on('click', function(elm) {
-    elm.preventDefault();
-    $('#search').animate({width: 'toggle'}).focus();
-  });
-}());
+} () );
+$(document).ready(function() {
+       function DropDownMenu() {
+        $('.dropdown-button').dropdown();
+      }
+    });
