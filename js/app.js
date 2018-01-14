@@ -258,14 +258,11 @@ $(document).ready(function() {
 
   // cerrar sesión
 
-  $('#sign-out').on('click', function() {
+  $('[data-id = "sign-out"]').on('click', function() {
     firebase.auth().signOut();
   });
 
-
-  // boton para estados, guarda en firebase
-
-  $('#home').on('click', function() {
+  $('[data-id = "home"]').on('click', function() {
     window.location.href = '../index.html';
   });
 
