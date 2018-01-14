@@ -1,5 +1,19 @@
+:root{
+  --color1 : #4dd0e1; /*mediumturquoise*/
+  --color2 : #fff; /*white*/
+}
+
 body {
   font-family: 'Poppins', sans-serif;
+
+}
+
+.white-color {
+  color: var(--color2);
+}
+
+.turq {
+  color: var(--color1);
 }
 
 .font {
@@ -34,8 +48,7 @@ body {
 }
 
 .profile-data {
-  padding: 10px;
-  color: white;
+  padding: 15px;
 }
 
 #avatar img {
@@ -44,13 +57,17 @@ body {
   margin-left: 5%;
 }
 
+main {
+  margin-top: 20px;
+}
+
 .chat {
   border-radius: 10px;
   padding: 8px;
 }
 
 .chat-box {
-  background-color: white;
+  background-color: var(--color2);
   padding: 8px;
 }
 
@@ -69,51 +86,114 @@ body {
   padding: 8px;
 }
 
-.news-box {
-  background-color: white;
-  padding: 8px;
-  color: white;
-}
-
 .color-box {
-  color: white;
+  color: var(--color2);
 }
 
-/* datos basicos-perfil */
-
-.contenedor {
-  width: 80%;
-  margin: 50px auto;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 20px;
+.box-description {
+  border: 1px solid var(--color2);
+  margin: 10px 0;
+  border-radius: 10px;
+  display: none;
 }
 
-img {
-  width: 200px;
+.post {
+  border: 1px solid var(--color1);
+  margin: 5px 0;
+  border-radius: 5px;
 }
 
-.center {
-  background: yellow;
+#contact.post {
+  padding: 10px 0!important;
 }
 
-.card {
-  margin: 4px;
+ul.right.hide-on-med-and-down {
+  height: 64px;
 }
 
-div#user-name p {
-  font-size: 23px;
+ul li a {
+  height: 64px;
 }
 
-div#user-name {
-  padding-top: 10%;
+div img.responsive-img.circle.user {
+  width: 100%;
 }
 
-@media only screen and (min-width: 992px) {
-  div#user-name p {
-    font-size: 19px;
+p.user-name {
+  font-size: 30px;
+  margin: 0;
+}
+
+div#user-photo, div#other-user {
+  margin-left: 25%;
+}
+
+.followers {
+  display: block;
+}
+
+textarea#textarea {
+  padding: 10px;
+}
+
+/*settings*/
+  /* label color */
+   .input-field label {
+     color: #10aba7;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid var(--color1);
+     box-shadow: 0 1px 0 0 var(--color1);
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #10aba7;
+     box-shadow: 0 1px 0 0 #10aba7;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: var(--color1);
+   }
+
+@media only screen and (min-width: 601px) {
+  div.user-photo#user-photo, div.user-photo#other-user{
+    margin-left: 0;
+    width: 40%;
   }
-  div#user-name {
-    padding-top: 5%;
+
+  div#user-photo {
+    margin: 0;
+  }
+
+  p.user-name {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  p.white-color.center-align {
+    margin: 2px 0;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  p.white-color.center-align {
+    margin: 2px 0;
+  }
+
+  textarea#textarea {
+    padding: 10px;
+    height: 4rem;
+  }
+}
+
+
+@media only screen and (min-width: 993px) {
+  div.user-photo#user-photo, div.user-photo#other-user {
+    width: 30%;
+  }
+
+  main {
+    margin-top: 40px;
   }
 }

@@ -6,82 +6,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Memorabilia</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="vendors/materialize/css/materialize.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/chat.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Poppins" rel="stylesheet">
 </head>
 
 <body class="light-green lighten-5">
-  <!-- LOGIN MODULE -->
-  <div class="main" id="page">
-    <div class="row cyan darken-1 z-depth-5">
-      <div class="navbar-fixed">
-        <nav class="row cyan darken-1 z-depth-0">
-          <div class="nav-wrapper">
-            <div class="container">
-              <div class="row">
-                <div class="col s12">
-                  <a href="#" class="brand-logo font">Memorabilia</a>
-                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                  <ul class="right hide-on-med-and-down">
-                    <li>
-                      <a id="profile" target="_blank"><i class="material-icons">account_circle</i></a>
-                    </li>
-                    <li><a href="#following">Notifications</a></li>
-                    <li><a href="#myCollection">My collection</a></li>
-                    <li>
-                      <a><i class="material-icons" id="sign-out">vpn_key</i></a>
-                    </li>
-                  </ul>
-                  <ul class="side-nav" id="mobile-demo">
-                    <div class="user-view">
-                      <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
-                      <li><a href="index.html"><i class="material-icons">notifications_active</i>Notifications</a></li>
-                      <li><a href="#myCollection"><i class="material-icons">collections</i>My Collection</a></li>
-                    </div>
-                  </ul>
-                </div>
-              </div>
+  <header>
+    <div class="navbar-fixed">
+      <nav class="nav-wrapper">
+        <div class="cyan darken-1 z-depth-5">
+          <div class="container">
+            <div class="col s12">
+              <a href="#" class="brand-logo font">Memorabilia</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="right hide-on-med-and-down">
+                <li>
+                  <a data-id = "profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                </li>
+                <li>
+                  <a data-id = "sign-out"><i class="fa fa-sign-out" aria-hidden="true" id="sign-out"></i>Cerrar Sesión</a>
+                </li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                <li>
+                  <a data-id = "profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Perfil</a>
+                </li>
+                <li>
+                  <a><i class="fa fa-bell" aria-hidden="true"></i>Notificaciones</a>
+                </li>
+                <li>
+                  <a data-id = "sign-out"><i class="fa fa-sign-out" aria-hidden="true" id="sign-out"></i>Cerrar Sesión</a>
+                </li>
+              </ul>
             </div>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </div>
+  </header>
+  <main>
     <div class="row">
       <div class="container">
         <div class="col s12 m5 l4 section">
           <div class="profile z-depth-4">
             <div class="profile-div">
               <div class="profile-data">
-                <div id="avatar" class="col s12 m6">
-                  <div class="user-photo" id="user-photo"></div>
-                  <div class="center-align user-index" id="user-name"></div>
-                </div>
-                <div id="info-user" class="col s12 m6">
-                  <div class="col s4 m12"># Colecciones</div>
-                  <div class="col s4 m12">### Amigos</div>
-                  <div class="col s4 m12"># Seguidores</div>
+                <div class="row">
+                  <div class="col s6 m12 user-photo-index" id="user-photo"></div>
+                  <div class="col s12 center-align white-color" id="user-name"></div>
+                  <div id="info-user" class="col s12">
+                    <div class="col s4 m6">
+                      <span class="white-color followers center-align">45</span>
+                      <p class="white-color center-align">Colecciones</p>
+                    </div>
+                    <div class="col s4 m6">
+                      <span class="white-color followers center-align">234</span>
+                      <p class="white-color center-align">Seguidores</p>
+                    </div>
+                    <div class="col s4 m12 center-align">
+                      <a href="#" class="white-color center-align"><i class="fa fa-cog" aria-hidden="true"></i>Editar mi perfil</a>
+                    </div>
+                  </div>
                 </div>
                 <div id="post">
-                  <form>
-                    <div class="row bottom-0">
-                      <div class="input-field col s12">
-                        <div id="contain-val-text"></div>
-                        <textarea id="textarea" class="col s12 materialize-textarea light-green lighten-5 color-textarea" value="text"></textarea>
-                        <label for="textarea1 teal accent-4">¿Piensas en algo?</label>
-                      </div>
-                      <div class="col s12">
-                        <button class="waves-effect waves-light btn" id="bt-send-text">Guardar<i class="material-icons left">spellcheck</i></button>
-                      </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="textarea" class="col s12 materialize-textarea light-green lighten-5 color-textarea" value="text"></textarea>
+                      <label for="textarea1 teal accent-4">¿Piensas en algo?</label>
                     </div>
-                  </form>
+                    <div class="col s4 offset-s4 m10 offset-m1 l8 offset-l2">
+                      <button class="waves-effect waves-light btn" id="bt-send-text">Guardar<i class="material-icons left">spellcheck</i></button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="blue-grey chat z-depth-4">
+          <div class="profile chat z-depth-4">
             <div class="chat-box">
               <ul class="collection">
                 <li class="collection-item avatar">
@@ -115,73 +122,46 @@
           </div>
         </div>
         <div class="col s12 m7 l8 section">
-          <div class="section-news z-depth-4">
-            <div class="news-box" id="news-box">
-              NOTICIAS
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="fixed-action-btn horizontal">
-          <a class="btn-floating btn-large cyan darken-2">
-            <i class="large material-icons">mode_edit</i>
-          </a>
-          <ul>
-            <li><a class="btn-floating green"><i class="material-icons teal accent-2">chat</i></a></li>
-          </ul>
-        </div>
-        <div class="floating-chat">
-    <i class="fa fa-comments" aria-hidden="true"></i>
-
-</div>-->
-
-        <div class="fixed-action-btn horizontal">
-          <div class="cht cyan lighten-2">
-            <div class="cht_header">
-              <span id="cht_head">Live Chat</span>
-              <div class="cht_loader"></div>
-              <div class="cht_option"><i class="zmdi zmdi-more-vert"></i>
+          <div class="section-news z-depth-4 white">
+            <div class="row">
+              <div class="col s12 news-box">
+                <ul class="tabs">
+                  <li class="tab col s3"><a href="#test1"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>
+                  <li class="tab col s3"><a href="#test2">Las top</a></li>
+                  <li class="tab col s3"><a href="#test3"><i class="fa fa-address-book-o" aria-hidden="true"></i></a></li>
+                  <li class="tab col s3"><a href="#test4"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+              <div id="test1" class="col s12">
+                <div id="news-box"></div>
+              </div>
+              <div id="test2" class="col s12">
+                <div class="chips chips-autocomplete"></div>
+              </div>
+              <div id="test3" class="col s12">
+                <div class="chips chips-autocomplete"></div>
+                <div class="row">
+                  <div id="contact" class="col s12"></div>
+                </div>
+              </div>
+              <div id="test4" class="col s12">
+                <span>Live Chat</span>
                 <div class="row" id="content-chat">
                   <div class="col s12">
-                    <div id="content-msg">
-                    </div>
+                    <div id="content-msg"></div>
                   </div>
+                </div>
+                <div>
+                  <input id="cht_log_email" placeholder="Escribe un mensaje">
+                  <a class="btn-large cyan darken-1" id="btn-send"><i class="material-icons">send</i></a>
                 </div>
               </div>
             </div>
-            <div class="cht_login">
-              <input id="cht_log_email" placeholder="Escribe un mensaje">
-              <a class="btn-large cyan darken-1" href="#" id="btn-send"><i class="material-icons">send</i></a>
-            </div>
           </div>
-          <a id="prime" class="fab cyan lighten-2"><i class="large material-icons">mode_edit</i></a>
         </div>
       </div>
     </div>
-  </div>
+  </main>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="vendors/materialize/js/materialize.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>

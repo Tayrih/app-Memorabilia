@@ -32,7 +32,7 @@
                   <a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a>
                 </li>
                 <li>
-                  <a data-id = "sign-out"><i class="fa fa-sign-out" aria-hidden="true" data-id = "sign-out"></i>Cerrar Sesión</a>
+                  <a data-id = "sign-out"><i class="fa fa-sign-out" aria-hidden="true" id="sign-out"></i>Cerrar Sesión</a>
                 </li>
               </ul>
               <ul class="side-nav" id="mobile-demo">
@@ -58,9 +58,13 @@
         <div class="profile-div">
           <div class="profile-data">
             <div class="row">
-              <div class="col s6 user-photo" id="user-photo"></div>
+              <div class="col s6 user-photo" id="other-user">
+                <img src="../assets/images/user_circle.png" class="responsive-img circle user">
+              </div>
               <div class="col s12 m7 l8">
-                <div class="center-align white-color" id="user-name-profile"></div>
+                <div class="center-align white-color" id="other-user-name">
+                  <p>Your Name</p>
+                </div>
               </div>
               <div id="info-user" class="col s12 m7 l8">
                 <p class="col s6 white-color center-align"><span class="followers">345</span>Seguidores</p>
@@ -68,7 +72,7 @@
                 <div class="col s12 box-description">
                   <p class="white-color">Inserte algo sobre usted</p>
                 </div>
-                <a href="#" class="col s6 offset-s6 white-color center-align"><i class="fa fa-cog" aria-hidden="true"></i>Editar mi perfil</a>
+                <a href="#" class="col s6 offset-s6 waves-effect waves-light btn">Seguir</a>
               </div>
             </div>
           </div>
@@ -79,9 +83,9 @@
       <div class="row">
         <div class="col s12">
           <ul class="tabs">
-            <li class="tab col s4 center-align"><a href="#test1">Mis Colecciones</a></li>
+            <li class="tab col s4 center-align"><a href="#test1">Colecciones</a></li>
             <li class="tab col s4 center-align"><a href="#test2">Las top</a></li>
-            <li class="tab col s4 center-align"><a href="#test3">Mis Fans</a></li>
+            <li class="tab col s4 center-align"><a href="#test3">Seguidores</a></li>
           </ul>
         </div>
         <div id="test1">
