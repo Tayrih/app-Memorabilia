@@ -58,7 +58,6 @@ $(document).ready(function() {
   function signOut() {
     window.location.href = '../views/login.html';
   }
-
   $('#btn-google').on('click', loginGoogle);
   $('#btn-fb').on('click', loginFacebook);
 });

@@ -107,6 +107,22 @@ main {
   padding: 10px 0!important;
 }
 
+i.fa.fa-heart-o.turq:hover{
+  color: #cc3019;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+span.col.s6.post-time {
+  font-weight: bold;
+  font-size: 11px;
+  color: #00838f;
+}
+
+.col.s12.icon-box {
+    margin: 15px 0;
+}
+
 ul.right.hide-on-med-and-down {
   height: 64px;
 }
@@ -196,4 +212,15 @@ textarea#textarea {
   main {
     margin-top: 40px;
   }
+}
+
+/*Ffffffffffffffffffff*/
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 0 4px #fff;
+  background: rgba(0, 0, 0, 0.2);
 }

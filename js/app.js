@@ -107,6 +107,25 @@ $(document).ready(function() {
     });
   });
 
+  (valTextChat).keypress(function(e) {
+    valTextChat.scrollTop(valTextChat.scrollHeight - valTextChat.height());
+    if(e.which == 13) {
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          var name = user.displayName;
+          var msg = valTextChat.val();
+
+          firebase.database().ref('chat').push({
+            name: name,
+            message: msg
+          });
+        }
+    });
+
+    }
+  });
+
   // obtiene data de la base de datos
 
   firebase.database().ref('chat').on('value', function(snapshot) {
@@ -115,7 +134,7 @@ $(document).ready(function() {
       var element = elm.val();
       var txtName = element.name;
       var txtMsg = element.message;
-      var tName = $('<li/>', {
+      var tName = $('<p/>', {
         'class': 'li',
       }).text(txtName + ': ' + txtMsg);
 
@@ -131,10 +150,20 @@ $(document).ready(function() {
       if (user) {
         var name2 = user.displayName;
         var state = valTextState.val();
+        //var timeP = time();
+        var icon = 0;
+
+        var cont = 0;
+
+        $('#heart').on('click', function() {
+          console.log('uno');
+        });
 
         firebase.database().ref('state').push({
           user: name2,
-          message: state
+          message: state,
+          //time: time,
+          iconh: icon
         });
       }
     });
@@ -148,16 +177,36 @@ $(document).ready(function() {
       var element = elm.val();
       var name2U = element.user;
       var states = element.message;
+      var dTime = element.time;
+      var contLike = element.iconh;
 
       var sUserCard = $('<div/>', {
         'class': 'post col s12',
       });
 
+      var iconPost = $('<div/>', {
+        'class': 'col s6 icon-box',
+      });
+
+      var iconHeart = $('<i/>', {
+        'class': 'fa fa-heart-o turq',
+        'aria-hiden': 'true',
+        'id': 'heart'
+      }).text(contLike);
+
+      //var postTime = $('<span/>', {
+      //  'class': 'col s6 post-time right-align',
+      // }).text(dTime);      
+
       var post = $('<p/>', {
         'class': 'li',
       }).text(name2U + ': ' + states);
+
       newBox.append(sUserCard);
       sUserCard.append(post);
+      sUserCard.append(iconPost);
+      //sUserCard.append(postTime);
+      iconPost.append(iconHeart);
     });
   });
 
@@ -166,7 +215,7 @@ $(document).ready(function() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       firebase.database().ref('user').on('value', function(snapshot) {
-        containerContact.html("");
+        containerContact.html('');
         snapshot.forEach(function(elm) {
           var element = elm.val().data;
           // console.log(element);
@@ -232,7 +281,7 @@ $(document).ready(function() {
       });
     }
   });
-
+/*
   // settings
   var upload = $('#uploader');
   var btNewImage = $('#bt-new-img');
@@ -254,7 +303,7 @@ $(document).ready(function() {
         });
       });
     }
-  });
+  });*/
 
   // cerrar sesión
 
@@ -270,7 +319,25 @@ $(document).ready(function() {
     window.location.href = 'views/perfil.html';
   });
 
+  function time() {
+    var date = new Date();
+    var hours = date.getHours();
+    var min = date.getMinutes();
+    var time;
+    if (min < 10) {
+      min = '0' + min;
+    }
 
+    if (hours > 12 && hours <= 24) {
+      time = hours - 12 + ':' + min + ' pm ';
+    } else if (hours === 12) {
+      time = hours + ':' + min + ' m ';
+    } else {
+      time = hours + ':' + min + ' am ';
+    }
+
+    return time;
+  }
 
   $(function() {
     $('.button-collapse').sideNav();
