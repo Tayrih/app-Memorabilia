@@ -1,3 +1,4 @@
+var userConect = null;
 $(function() {
   $('#slideshow > div:gt(0)').hide();
   setInterval(function() {
@@ -14,8 +15,8 @@ $(document).ready(function() {
   	 firebase.auth().signInWithPopup(provider).then(function(result) {
 			  var token = result.credential.accessToken;
 			  var user = result.user;
-			  var name = result.user.displayName;
-        window.location.href = '../index.html';
+        var name = result.user.displayName;
+        initFirebase(result.user);
       }).catch(function(error) {
 			  var errorCode = error.code;
 			  var errorMessage = error.message;
@@ -38,8 +39,8 @@ $(document).ready(function() {
   	 firebase.auth().signInWithPopup(provider).then(function(result) {
 			  var token = result.credential.accessToken;
 			  var user = result.user;
-			  var name = user.displayName;
-        window.location.href = '../index.html';
+        var name = user.displayName;
+        initFirebase(result.user);
       }).catch(function(error) {
 			  var errorCode = error.code;
 			  var errorMessage = error.message;
@@ -58,6 +59,38 @@ $(document).ready(function() {
   function signOut() {
     window.location.href = '../views/login.html';
   }
+
   $('#btn-google').on('click', loginGoogle);
   $('#btn-fb').on('click', loginFacebook);
 });
+
+function initFirebase(usuario) {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var uid = user.uid;
+      userConect = firebase.database().ref('/user/' + usuario.uid + '/data');
+      // console.log(user);
+      firebase.database().ref('/user/' + usuario.uid + '/data').on('value', function(snapshot) {
+        console.log(snapshot.val());
+        if (snapshot.val() !== null) {
+          if (snapshot.val().uid === usuario.uid) {
+            console.log('usuario ya registrado anteriormente');
+          }
+        } else {
+          // conecto a la base de datos creo la referencia user y llamo a addUserDb
+          addUserDb(usuario.uid, user.displayName, user.photoURL);
+        }
+      });
+    }
+  });
+}
+// obtiene uid y name
+function addUserDb(uid, name, photo) {
+  var conect = userConect.set({
+    uid: uid,
+    name: name,
+    photo: photo
+  });
+
+  window.location.href = '../index.html';
+}

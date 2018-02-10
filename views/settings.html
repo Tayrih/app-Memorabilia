@@ -14,7 +14,7 @@
   <title>Perfil</title>
 </head>
 
-<body class="light-green lighten-5">
+<body class="light-green lighten-5" onload="settings()">
   <header>
     <div class="navbar-fixed">
       <nav class="nav-wrapper">
@@ -60,7 +60,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input value="Alvin" id="new-name" type="text" class="validate">
+          <input value="" id="new-name" type="text" class="validate" placeholder="">
           <label class="active" for="new-name">Nombre</label>
         </div>
       </div>
@@ -86,7 +86,7 @@
             <div class="btn cyan darken-1" id="bt-new-img">
               <i class="fa fa-upload" aria-hidden="true"></i>
               <span>Cambiar imagen</span>
-              <input type="file">
+              <input type="file" id="newimg" name="newimg">
             </div>
             <div class="file-path-wrapper">
               <progress value="0" max="100" id="uploader" class="col s12">0%</progress>
