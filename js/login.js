@@ -55,13 +55,21 @@ $(document).ready(function() {
   		firebase.auth().signOut();
   	}
   }
-
+  /*
   function signOut() {
-    window.location.href = '../views/login.html';
-  }
-
+    window.location.href = 'views/login.html';
+  };
+*/
   $('#btn-google').on('click', loginGoogle);
   $('#btn-fb').on('click', loginFacebook);
+
+  // esta parte detectara si hay un usuario ya logueado y nos redigira a index
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      window.location.href = '../index.html';
+    }
+  });
 });
 
 function initFirebase(usuario) {
@@ -75,6 +83,7 @@ function initFirebase(usuario) {
         if (snapshot.val() !== null) {
           if (snapshot.val().uid === usuario.uid) {
             console.log('usuario ya registrado anteriormente');
+            window.location.href = '../index.html';
           }
         } else {
           // conecto a la base de datos creo la referencia user y llamo a addUserDb
@@ -85,6 +94,8 @@ function initFirebase(usuario) {
   });
 }
 // obtiene uid y name
+
+
 function addUserDb(uid, name, photo) {
   var conect = userConect.set({
     uid: uid,

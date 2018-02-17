@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="vendors/materialize/css/materialize.css">
   <link rel="stylesheet" href="css/main.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Poppins" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico|Poppins" rel="stylesheet">
 </head>
 
 <body class="light-green lighten-5" onload="index(); chat()">
@@ -20,28 +20,21 @@
         <div class="cyan darken-1 z-depth-5">
           <div class="container">
             <div class="col s12">
-              <a href="#" class="brand-logo font">Memorabilia</a>
-              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-              <ul class="right hide-on-med-and-down">
+              <a href="#" class="left col s6 brand-logo font">Memorabilia</a>
+              <ul class="col s6 right">
                 <li>
-                  <a data-id = "profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                  <a data-id="profile">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                  </a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                  <a href="#">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                  </a>
                 </li>
                 <li>
-                  <a data-id="sign-out"><i class="fa fa-sign-out" aria-hidden="true" id="sign-out"></i>Cerrar Sesión</a>
-                </li>
-              </ul>
-              <ul class="side-nav" id="mobile-demo">
-                <li>
-                  <a data-id = "profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Perfil</a>
-                </li>
-                <li>
-                  <a><i class="fa fa-bell" aria-hidden="true"></i>Notificaciones</a>
-                </li>
-                <li>
-                  <a data-id="sign-out"><i class="fa fa-sign-out" aria-hidden="true" id="sign-out"></i>Cerrar Sesión</a>
+                  <a data-id="sign-out">
+                    <i class="fa fa-sign-out" aria-hidden="true" id="sign-out"></i>Cerrar Sesión</a>
                 </li>
               </ul>
             </div>
@@ -70,7 +63,8 @@
                       <p class="white-color center-align">Seguidores</p>
                     </div>
                     <div class="col s4 m12 center-align">
-                      <a href="#" class="white-color center-align"><i class="fa fa-cog" aria-hidden="true"></i>Editar mi perfil</a>
+                      <a href="#" class="white-color center-align">
+                        <i class="fa fa-cog" aria-hidden="true"></i>Editar mi perfil</a>
                     </div>
                   </div>
                 </div>
@@ -81,14 +75,16 @@
                       <label for="textarea1 teal accent-4">¿Piensas en algo?</label>
                     </div>
                     <div class="col s4 offset-s4 m10 offset-m1 l8 offset-l2">
-                      <button class="waves-effect waves-light btn" id="bt-send-text">Guardar<i class="material-icons left">spellcheck</i></button>
+                      <button class="waves-effect waves-light btn" id="bt-send-text">Guardar
+                        <i class="material-icons left">spellcheck</i>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="profile chat z-depth-4">
+          <!-- <div class="profile chat z-depth-4">
             <div class="chat-box">
               <ul class="collection">
                 <li class="collection-item avatar">
@@ -119,17 +115,31 @@
                 </form>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col s12 m7 l8 section">
           <div class="section-news z-depth-4 white">
             <div class="row">
               <div class="col s12 news-box">
                 <ul class="tabs">
-                  <li class="tab col s3"><a href="#test1"><i class="fa fa-newspaper-o" aria-hidden="true"></i></a></li>
-                  <li class="tab col s3"><a href="#test2">Las top</a></li>
-                  <li class="tab col s3"><a href="#test3"><i class="fa fa-address-book-o" aria-hidden="true"></i></a></li>
-                  <li class="tab col s3"><a href="#test4"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                  <li class="tab col s3">
+                    <a href="#test1">
+                      <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="tab col s3">
+                    <a href="#test2">Las top</a>
+                  </li>
+                  <li class="tab col s3">
+                    <a href="#test3">
+                      <i class="fa fa-address-book-o" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                  <li class="tab col s3">
+                    <a href="#test4">
+                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div id="test1" class="col s12">
@@ -137,6 +147,92 @@
               </div>
               <div id="test2" class="col s12">
                 <div class="chips chips-autocomplete"></div>
+                <div class="row">
+                  <div class="col s12">
+                    <div class="card">
+                      <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator responsive-img" src="../assets/images/group1.jpg">
+                      </div>
+                      <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">🎆Traveling 🎶
+                          <i class="material-icons right">more_vert</i>
+                        </span>
+                        <p>
+                          <a href="#">This is a link</a>
+                        </p>
+                      </div>
+                      <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title
+                          <i class="material-icons right">close</i>
+                        </span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12">
+                    <div class="card">
+                      <div class="card-image">
+                        <img class="activator responsive-img" src="../assets/images/group3.jpg">
+                      </div>
+                      <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Super Family😎
+                          <i class="material-icons right">more_vert</i>
+                        </span>
+                        <p>
+                          <a href="#">This is a link</a>
+                        </p>
+                      </div>
+                      <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title
+                          <i class="material-icons right">close</i>
+                        </span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12">
+                    <div class="card">
+                      <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="../assets/images/group4.jpg">
+                      </div>
+                      <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">CoMiCs
+                          <i class="material-icons right">more_vert</i>
+                        </span>
+                        <p>
+                          <a href="#">This is a link</a>
+                        </p>
+                      </div>
+                      <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title
+                          <i class="material-icons right">close</i>
+                        </span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12">
+                    <div class="card">
+                      <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator responsive-img" src="../assets/images/group2.jpg">
+                      </div>
+                      <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">COsPlay
+                          <i class="material-icons right">more_vert</i>
+                        </span>
+                        <p>
+                          <a href="#">This is a link</a>
+                        </p>
+                      </div>
+                      <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Card Title
+                          <i class="material-icons right">close</i>
+                        </span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div id="test3" class="col s12">
                 <div class="chips chips-autocomplete"></div>
@@ -153,7 +249,9 @@
                 </div>
                 <div>
                   <input id="cht_log_email" placeholder="Escribe un mensaje">
-                  <a class="btn-large cyan darken-1" id="btn-send"><i class="material-icons">send</i></a>
+                  <a class="btn-large cyan darken-1" id="btn-send">
+                    <i class="material-icons">send</i>
+                  </a>
                 </div>
 
               </div>

@@ -13,13 +13,15 @@ var buttonFollow = $('<a/>', {
 
 function redirectLogin() {
   firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      initFirebase();
-    } else {
-      window.location.href = 'views/login.html';
+    if (!user) {
+      console.log(window.location.host + '/views/login.html');
+      window.location.href = 'http://' + window.location.host + '/views/login.html';
     }
   });
 }
+redirectLogin();
+
+
 function index() {
   function initFirebase() {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -30,12 +32,23 @@ function index() {
           if (snapshot.val().uid === user.uid) {
             userSession = snapshot.val();
             var displayName = userSession.name;
-            
             var userPhoto = null;
+
             if (userSession.newPhoto === true)
               userPhoto = userSession.urlNewPhoto;
             else
               userPhoto = userSession.photo;
+
+            if (userSession.aboutYou) {
+              var about = userSession.aboutYou;
+              $('#about').html(about);
+            }
+
+            if (userSession.newColection) {
+              var colec = userSession.newColection;
+              $('#colect').html(colec);
+            } 
+
             var pName = $('<p/>', {
               'class': 'user-name',
             });
@@ -48,7 +61,7 @@ function index() {
             profileName.append(displayName);
             userName.append(pName);
             userNameProfile.append(profileName);
-
+            
             var imgU = $('<img>', {
               'class': 'responsive-img circle user',
               'src': userPhoto
@@ -62,12 +75,6 @@ function index() {
 
   initFirebase();
 }
-/*
-$(window).on('load', function() {
-  redirectLogin();
-});
-*/
-
 
 function chat() {
   $(document).ready(function() {
@@ -92,9 +99,9 @@ function chat() {
       });
     });
 
-    (valTextChat).keypress(function(e) {
+    (valTextChat).keypress(function(elm) {
       valTextChat.scrollTop(valTextChat.scrollHeight - valTextChat.height());
-      if (e.which === 13) {
+      if (elm.which === 13) {
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
             var name = user.displayName;
@@ -193,7 +200,6 @@ function chat() {
       });
     });
 
-    // data para contactos
     var containerContact = $('#contact');
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -201,10 +207,28 @@ function chat() {
           containerContact.html('');
           snapshot.forEach(function(elm) {
             var element = elm.val().data;
-            // console.log(element);
             var contact = element.name;
             var photoContact = element.photo;
             var uid = element.uid;
+            // consulta dentro de los datos del Usuario actual
+            firebase.database().ref('user/' + userSession.uid + '/follow/' + element.uid).on('value', function(snapshot) {
+              if (snapshot.val() !== null) {
+                buttonFollow = $('<a/>', {
+                  'class': 'waves-effect waves-light btn unfollow',
+                  'data-id': uid,
+                  'data-user': user.uid,
+                }).text('Dejar de Seguir');
+              } else {
+                buttonFollow = $('<a/>', {
+                  'class': 'waves-effect waves-light btn follow',
+                  'data-id': uid,
+                  'data-user': user.uid,
+                }).text('Seguir');
+              }
+            });
+            
+            // console.log(element);
+            
             // var colection; campo que ingresa el usuario al configurar su perfil
             var boxContact = $('<div/>', {
               'class': 'post col s12',
@@ -226,15 +250,6 @@ function chat() {
               'class': 'col s10',
             }).text(contact);
 
-            buttonFollow = $('<a/>', {
-              'class': 'waves-effect waves-light btn follow',
-              'data-id': uid,
-              'data-user': user.uid,
-            }).text('Seguir');
-
-            /* var infContact = $('<p/>', {
-            'class': 'li',
-          }).text(colection);*/
             containerContact.append(boxContact);
             boxContact.append(boxImg);
             $('#box-img' + uid).append(imgContact);
@@ -245,7 +260,8 @@ function chat() {
           $('.follow').on('click', function() {
             var follow = $(this).data('id');
             var user = $(this).data('user');
-            // console.log($(this).data('id'));
+            
+            console.log($(this).data('id'));
             var postData = {
               follow: follow
             };
@@ -267,7 +283,7 @@ function chat() {
     });
   });
 }
-
+// obtiene lista de seguidores 
 function settings() {
   $(document).ready(function() {
     // settings
@@ -323,8 +339,7 @@ function settings() {
           }
 
         );
-      }
-      else {
+      } else {
         console.log(dataUser);
         var update = {};
         update['/user/' + useruid + '/data'] = dataUser;
@@ -332,17 +347,16 @@ function settings() {
         firebase.database().ref().update(update);
         alert('Datos actualizados');
       }
-      
     });
 
     // cerrar sesión
   });
 }
 
-
 $(document).ready(function() {
   $('[data-id = "sign-out"]').on('click', function() {
     firebase.auth().signOut();
+    window.location.href = 'views/login.html';
   });
   
   $('[data-id = "home"]').on('click', function() {
@@ -388,30 +402,120 @@ $(document).ready(function() {
   });
 });
 
+function profile() {
+  // var useruid = window.location.hash.substring(1);
+  // console.log(useruid);
 
-/* function time() {
-  var date = new Date();
-  var hours = date.getHours();
-  var min = date.getMinutes();
-  var time;
-  if (min < 10) {
-    min = '0' + min;
-  }
+  var containerContact = $('#followers');
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      firebase.database().ref('user/' + user.uid + '/follower').on('value', function(snapshot) {
+        containerContact.html('');
+        console.log(snapshot.val());
+        if (snapshot.val() !== null) {
+          snapshot.forEach(function(elm) {
+            var element = elm.val().follower;
+            console.log(element);
+            firebase.database().ref('user/' + element + '/data').on('value', function(snapshot) {
+              var follower = snapshot.val();
+              var contact = follower.name;
+              var photoContact = follower.photo;
+              var uid = follower.uid;
+              // var colection; campo que ingresa el usuario al configurar su perfil
+              var boxContact = $('<div/>', {
+                'class': 'post col s12',
+                'id': 'box-contact' + uid
+              });
 
-  if (hours > 12 && hours <= 24) {
-    time = hours - 12 + ':' + min + ' pm ';
-  } else if (hours === 12) {
-    time = hours + ':' + min + ' m ';
-  } else {
-    time = hours + ':' + min + ' am ';
-  }
+              var boxImg = $('<div/>', {
+                'class': 'box-contact col s2',
+                'id': 'box-img' + uid
+              });
 
-  return time;
+              var imgContact = $('<img>', {
+                'class': 'responsive-img circle user img-cont',
+                'src': photoContact
+              });
+
+              var nameContact = $('<a/>', {
+                'href': 'views/profile.html#' + uid,
+                'class': 'col s10',
+              }).text(contact);
+              console.log(userSession.uid + '->' + uid);
+              var ref = 'user/' + userSession.uid + '/follow/' + uid;
+              firebase.database().ref(ref).on('value', function(snapshot) {
+                console.log(ref);
+                console.log(snapshot.val());
+                // Me llaman... corrige aca por que no esta consultando o que paso ya 
+                if (snapshot.val() !== null) {
+                  buttonFollow = $('<a/>', {
+                    'class': 'waves-effect waves-light btn unfollow',
+                    'data-id': uid,
+                    'data-user': user.uid,
+                  }).text('Dejar de Seguir');
+                } else {
+                  buttonFollow = $('<a/>', {
+                    'class': 'waves-effect waves-light btn follow',
+                    'data-id': uid,
+                    'data-user': userSession.uid,
+                  }).text('Seguir');
+                }
+                
+                $('#box-contact' + uid).append(buttonFollow);
+                $('.follow').on('click', function() {
+                  console.log('Siguiendo a ' + $(this).data('id'));
+                  var follow = $(this).data('id');
+                  var user = $(this).data('user');
+                  
+                  // console.log($(this).data('id'));
+                  var postData = {
+                    follow: follow
+                  };
+      
+                  var postUser = {
+                    follower: user,
+                  };
+      
+                  // Get a key for a new Post.
+                  // Write the new post's data simultaneously in the posts list and the user's post list.
+                  var updates = {};
+                  updates['/user/' + user + '/follow/' + follow] = postData;
+                  updates['/user/' + follow + '/follower/' + user] = postUser;
+      
+                  firebase.database().ref().update(updates);
+                });
+              });
+              containerContact.append(boxContact);
+              boxContact.append(boxImg);
+              $('#box-img' + uid).append(imgContact);
+              $('#box-contact' + uid).append(nameContact);
+            });
+          });
+        } // cierra fif null
+      }); // cierra consulta follower
+    } // Cierra if(user) 
+  }); // Cierra COnsulta si existe usuario logueado
 }
-*/
 
-function profile(){
-  var useruid = window.location.hash.substring(1);
-  console.log(useruid);
+function profileContact(params) {
+  var useruid = window.location.hash.substring(1);  
+  // console.log(useruid); hace referencia al nombre que se da click
 
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      firebase.database().ref('/user/' + useruid + '/data').on('value', function(snapshot) {
+        var userPhoto = $('<img>', {
+          'class': 'responsive-img circle user img-cont',
+          'src': snapshot.val().photo
+        });
+        
+        var pName = $('<p/>', {
+          'class': 'user-name',
+        }).text(snapshot.val().name);
+
+        $('#other-user').append(userPhoto);
+        $('#other-user-name').append(pName);
+      }); 
+    } 
+  }); 
 }

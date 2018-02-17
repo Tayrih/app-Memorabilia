@@ -5,7 +5,6 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-
 }
 
 .white-color {
@@ -17,7 +16,7 @@ body {
 }
 
 .font {
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Pacifico', cursive;
   font-size: 5em;
 }
 
@@ -94,7 +93,14 @@ main {
   border: 1px solid var(--color2);
   margin: 10px 0;
   border-radius: 10px;
-  display: none;
+  font-weight: bold;
+}
+
+p.col.s6.white-color.center-align {
+  background-color: #f1f8e9;
+  border-radius: 10px;
+  color: #00bcd4;
+  font-weight: 700;
 }
 
 .post {
@@ -128,7 +134,7 @@ ul.right.hide-on-med-and-down {
 }
 
 ul li a {
-  height: 64px;
+  height: 56px;
 }
 
 div img.responsive-img.circle.user {
