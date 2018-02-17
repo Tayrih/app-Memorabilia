@@ -41,12 +41,12 @@ function index() {
 
             if (userSession.aboutYou) {
               var about = userSession.aboutYou;
-              $('#about').html(about);
+              $('#about').html('Sobre mi: ' + about);
             }
 
             if (userSession.newColection) {
               var colec = userSession.newColection;
-              $('#colect').html(colec);
+              $('#colect').html('Colecciono: ' + colec);
             } 
 
             var pName = $('<p/>', {
@@ -438,7 +438,7 @@ function profile() {
               });
 
               var nameContact = $('<a/>', {
-                'href': 'views/profile.html#' + uid,
+                'href': 'profile.html#' + uid,
                 'class': 'col s10',
               }).text(contact);
               console.log(userSession.uid + '->' + uid);
@@ -491,10 +491,10 @@ function profile() {
               $('#box-contact' + uid).append(nameContact);
             });
           });
-        } // cierra fif null
-      }); // cierra consulta follower
-    } // Cierra if(user) 
-  }); // Cierra COnsulta si existe usuario logueado
+        } 
+      }); 
+    } 
+  }); 
 }
 
 function profileContact(params) {

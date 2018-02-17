@@ -96,7 +96,9 @@ main {
   font-weight: bold;
 }
 
-p.col.s6.white-color.center-align {
+/* nj */
+
+p.col.s4.white-color.center-align {
   background-color: #f1f8e9;
   border-radius: 10px;
   color: #00bcd4;
@@ -111,6 +113,22 @@ p.col.s6.white-color.center-align {
 
 #contact.post {
   padding: 10px 0!important;
+}
+
+.color-bg.col.s12 {
+  background-color: #fff;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+nav.nav-wrapper {
+  height: 56px;
+}
+
+#contact div.post,
+#followers div.post {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 i.fa.fa-heart-o.turq:hover{
