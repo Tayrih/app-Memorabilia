@@ -168,7 +168,7 @@ function chat() {
       
               uploadTask.on('state_changed',
                 function(snapshot) {
-                  var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  var progress = parseInt((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                   console.log('Upload is ' + progress + '% done');      
                   $('#progress').html('<i class="fa fa-spinner fa-pulse"></i> <span>' + progress + '%</span>');
                 },
