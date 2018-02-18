@@ -47,7 +47,7 @@ function index() {
             if (userSession.newColection) {
               var colec = userSession.newColection;
               $('#colect').html('Colecciono: ' + colec);
-            } 
+            }
 
             var pName = $('<p/>', {
               'class': 'user-name',
@@ -61,13 +61,13 @@ function index() {
             profileName.append(displayName);
             userName.append(pName);
             userNameProfile.append(profileName);
-            
+
             var imgU = $('<img>', {
               'class': 'responsive-img circle user',
               'src': userPhoto
             });
             userImg.append(imgU);
-          } 
+          }
         });
       }
     });
@@ -78,7 +78,7 @@ function index() {
 
 function chat() {
   $(document).ready(function() {
-  // var nameUserChat = $('#name');
+    // var nameUserChat = $('#name');
     var valTextChat = $('#cht_log_email');
     var btnSend = $('#btn-send');
     var contChat = $('#content-msg');
@@ -87,15 +87,18 @@ function chat() {
 
     btnSend.on('click', function() {
       firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          var name = user.displayName;
-          var msg = valTextChat.val();
-
-          firebase.database().ref('chat').push({
-            name: name,
-            message: msg
-          });
-        }
+        firebase.database().ref('user/' + user.uid + '/data').on('value', function(snapshot) {
+          if (user) {
+            var name = snapshot.val().name;
+            var msg = valTextChat.val();
+            var photo = snapshot.val().photo;
+            firebase.database().ref('chat').push({
+              photo: photo,
+              name: name,
+              message: msg
+            });
+          }
+        });
       });
     });
 
@@ -103,15 +106,18 @@ function chat() {
       valTextChat.scrollTop(valTextChat.scrollHeight - valTextChat.height());
       if (elm.which === 13) {
         firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            var name = user.displayName;
-            var msg = valTextChat.val();
-
-            firebase.database().ref('chat').push({
-              name: name,
-              message: msg
-            });
-          }
+          firebase.database().ref('user/' + user.uid + '/data').on('value', function(snapshot) {
+            if (user) {
+              var name = snapshot.val().name;
+              var msg = valTextChat.val();
+              var photo = snapshot.val().photo;
+              firebase.database().ref('chat').push({
+                photo: photo,
+                name: name,
+                message: msg
+              });
+            }
+          });
         });
       }
     });
@@ -122,8 +128,10 @@ function chat() {
       contChat.html('');
       snapshot.forEach(function(elm) {
         var element = elm.val();
+        var photo = element.photo;
         var txtName = element.name;
         var txtMsg = element.message;
+
         var tName = $('<p/>', {
           'class': 'li',
         }).text(txtName + ': ' + txtMsg);
@@ -133,27 +141,44 @@ function chat() {
       });
     });
 
+    // publicar una imagen 
+
     // obtiene data para estados
     var valTextState = $('#textarea');
     $('#bt-send-text').on('click', function() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-          var name2 = user.displayName;
-          var state = valTextState.val();
-          // var timeP = time();
-          var icon = 0;
+          firebase.database().ref('user/' + user.uid + '/data').on('value', function(snapshot) {
+            var fichero = document.getElementById('newimg');
+            var file = fichero.files[0];
+            var download;
+            if (file !== undefined) {
+              var imgname = $('#newimg').val();
+              var storageRef = firebase.storage().ref();
+              var uploadTask = storageRef.child('PhotoStates/' + imgname).put(file);
+              uploadTask.on('state_changed',
+                function(snapshot) {
+                  // progreso
+                },
+                function(error) {
+                  alert('Hubo un error');
+                },
+                function() {
+                  download = uploadTask.snapshot.downloadURL;
+                }
+              );
+            }
 
-          var cont = 0;
-
-          $('#heart').on('click', function() {
-            console.log('uno');
-          });
-
-          firebase.database().ref('state').push({
-            user: name2,
-            message: state,
-            // time: time,
-            iconh: icon
+            var name2 = snapshot.val().name;
+            var state = valTextState.val();
+            var photo = snapshot.val().photo;
+            var newPhoto = download;
+            firebase.database().ref('state').push({
+              user: name2,
+              message: state,
+              photo: photo,
+              // newPhoto: newPhoto
+            });
           });
         }
       });
@@ -167,35 +192,56 @@ function chat() {
         var element = elm.val();
         var name2U = element.user;
         var states = element.message;
-        var dTime = element.time;
-        var contLike = element.iconh;
+        var photo = element.photo;
+        // var photoStates = element.newPhoto;
 
         var sUserCard = $('<div/>', {
           'class': 'post col s12',
         });
 
         var iconPost = $('<div/>', {
-          'class': 'col s6 icon-box',
+          'class': 'col s12 icon-box',
         });
+
+        var userPhoto = $('<img>', {
+          'class': 'circle imgindex',
+          'src': photo
+        });
+
+        var conImg = $('<div/>', {
+          'class': 'col s4 m4 l2',
+        }).append(userPhoto);
 
         var iconHeart = $('<i/>', {
           'class': 'fa fa-heart-o turq',
           'aria-hiden': 'true',
           'id': 'heart'
-        }).text(contLike);
+        });
 
-        // var postTime = $('<span/>', {
-        //  'class': 'col s6 post-time right-align',
-        // }).text(dTime);      
+        var namePost = $('<h5/>', {
+          'class': 'turq',
+        }).text(name2U + ': ');
 
         var post = $('<p/>', {
-          'class': 'li',
-        }).text(name2U + ': ' + states);
+          'class': 'turq',
+        }).text(states);
+
+        var conState = $('<div/>', {
+          'class': 'col s8 m8 l10',
+        });
+
+        // var photoSt = $('<img>', {
+        //   'class': 'responsive-img',
+        //   'src': photoStates
+        // });
 
         newBox.prepend(sUserCard);
-        sUserCard.append(post);
-        sUserCard.append(iconPost);
-        // sUserCard.append(postTime);
+        sUserCard.append(conImg);
+        sUserCard.append(conState);
+        conState.append(namePost);
+        // conState.append(photoSt);
+        conState.append(post);
+        conState.append(iconPost);
         iconPost.append(iconHeart);
       });
     });
@@ -226,9 +272,9 @@ function chat() {
                 }).text('Seguir');
               }
             });
-            
+
             // console.log(element);
-            
+
             // var colection; campo que ingresa el usuario al configurar su perfil
             var boxContact = $('<div/>', {
               'class': 'post col s12',
@@ -260,7 +306,7 @@ function chat() {
           $('.follow').on('click', function() {
             var follow = $(this).data('id');
             var user = $(this).data('user');
-            
+
             console.log($(this).data('id'));
             var postData = {
               follow: follow
@@ -314,7 +360,7 @@ function settings() {
         dataUser.newColection = $('#new-colect').val();
       if ($('#about-you').val() !== '')
         dataUser.aboutYou = $('#about-you').val();
-      
+
       var fichero = document.getElementById('newimg');
       var file = fichero.files[0];
       if (file !== undefined) {
@@ -324,26 +370,28 @@ function settings() {
 
         uploadTask.on('state_changed',
           function(snapshot) {
-            
-          }, function(error) {
+
+          },
+          function(error) {
             alert('Hubo un error');
-          }, function() {
+          },
+          function() {
             var downloadURL = uploadTask.snapshot.downloadURL;
             dataUser.urlNewPhoto = downloadURL;
-            console.log(dataUser);
+            // console.log(dataUser);
             var update = {};
             update['/user/' + useruid + '/data'] = dataUser;
-      
+
             firebase.database().ref().update(update);
             alert('Datos actualizados');
           }
 
         );
       } else {
-        console.log(dataUser);
+        // console.log(dataUser);
         var update = {};
         update['/user/' + useruid + '/data'] = dataUser;
-  
+
         firebase.database().ref().update(update);
         alert('Datos actualizados');
       }
@@ -358,23 +406,23 @@ $(document).ready(function() {
     firebase.auth().signOut();
     window.location.href = 'views/login.html';
   });
-  
+
   $('[data-id = "home"]').on('click', function() {
     window.location.href = '../index.html';
   });
-  
+
   $('[data-id="profile"]').on('click', function() {
     window.location.href = 'views/perfil.html';
   });
-  
+
   $('#config').on('click', function() {
     window.location.href = '../views/settings.html';
   });
-  
+
   $(function() {
     $('.button-collapse').sideNav();
   });
-  
+
   $('.chips').material_chip();
   $('.chips-initial').material_chip({
     data: [{
@@ -460,28 +508,28 @@ function profile() {
                     'data-user': userSession.uid,
                   }).text('Seguir');
                 }
-                
+
                 $('#box-contact' + uid).append(buttonFollow);
                 $('.follow').on('click', function() {
                   console.log('Siguiendo a ' + $(this).data('id'));
                   var follow = $(this).data('id');
                   var user = $(this).data('user');
-                  
+
                   // console.log($(this).data('id'));
                   var postData = {
                     follow: follow
                   };
-      
+
                   var postUser = {
                     follower: user,
                   };
-      
+
                   // Get a key for a new Post.
                   // Write the new post's data simultaneously in the posts list and the user's post list.
                   var updates = {};
                   updates['/user/' + user + '/follow/' + follow] = postData;
                   updates['/user/' + follow + '/follower/' + user] = postUser;
-      
+
                   firebase.database().ref().update(updates);
                 });
               });
@@ -491,31 +539,74 @@ function profile() {
               $('#box-contact' + uid).append(nameContact);
             });
           });
-        } 
-      }); 
-    } 
-  }); 
+        }
+      });
+    }
+  });
 }
 
 function profileContact(params) {
-  var useruid = window.location.hash.substring(1);  
+  var useruid = window.location.hash.substring(1);
   // console.log(useruid); hace referencia al nombre que se da click
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      var containerContact = $('#follower-other');
       firebase.database().ref('/user/' + useruid + '/data').on('value', function(snapshot) {
         var userPhoto = $('<img>', {
           'class': 'responsive-img circle user img-cont',
           'src': snapshot.val().photo
         });
-        
-        var pName = $('<p/>', {
-          'class': 'user-name',
+
+        var pName = $('<h3/>', {
+          'class': 'user-name-profile',
         }).text(snapshot.val().name);
 
         $('#other-user').append(userPhoto);
         $('#other-user-name').append(pName);
-      }); 
-    } 
-  }); 
+      });
+
+      firebase.database().ref('/user/' + useruid + '/follower').on('value', function(snapshot) {
+        console.log(snapshot.val());
+        containerContact.html('');
+        console.log(snapshot.val());
+        if (snapshot.val() !== null) {
+          snapshot.forEach(function(elm) {
+            var element = elm.val().follower;
+            console.log(element);
+            firebase.database().ref('user/' + element + '/data').on('value', function(snapshot) {
+              var follower = snapshot.val();
+              var contact = follower.name;
+              var photoContact = follower.photo;
+              var uid = follower.uid;
+              // var colection; campo que ingresa el usuario al configurar su perfil
+              var boxContact = $('<div/>', {
+                'class': 'post col s12',
+                'id': 'box-contact' + uid
+              });
+
+              var boxImg = $('<div/>', {
+                'class': 'box-contact col s2',
+                'id': 'box-img' + uid
+              });
+
+              var imgContact = $('<img>', {
+                'class': 'responsive-img circle user img-cont',
+                'src': photoContact
+              });
+
+              var nameContact = $('<a/>', {
+                'href': 'profile.html#' + uid,
+                'class': 'col s10',
+              }).text(contact);
+              containerContact.append(boxContact);
+              boxContact.append(boxImg);
+              $('#box-img' + uid).append(imgContact);
+              $('#box-contact' + uid).append(nameContact);
+            });
+          });
+        }
+      });
+    }
+  });
 }

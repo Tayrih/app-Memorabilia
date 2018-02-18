@@ -70,6 +70,17 @@ main {
   padding: 8px;
 }
 
+div#content-msg {
+  padding: 5px 15px;
+}
+
+p.li {
+  border: 1px solid #4db6ac;
+  border-radius: 5px;
+  padding: 10px 5px;
+  color: #00695c;
+}
+
 .bottom-0 {
   margin-bottom: 0px;
 }
@@ -96,7 +107,10 @@ main {
   font-weight: bold;
 }
 
-/* nj */
+img.circle.imgindex {
+  width: 5em;
+  padding: 10px 0;
+}
 
 p.col.s4.white-color.center-align {
   background-color: #f1f8e9;
@@ -125,6 +139,7 @@ nav.nav-wrapper {
   height: 56px;
 }
 
+#follower-other div.post,
 #contact div.post,
 #followers div.post {
   padding-top: 10px;
