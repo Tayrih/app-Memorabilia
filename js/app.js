@@ -149,36 +149,60 @@ function chat() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           firebase.database().ref('user/' + user.uid + '/data').on('value', function(snapshot) {
+            var userState = null;
+            firebase.database().ref('state').on('value', function(snapshot) {
+              userState = snapshot.val();
+            });
+      
+            if ($('#textarea').val() !== '')
+              userState.message = $('#textarea').val();
+      
             var fichero = document.getElementById('newimg');
             var file = fichero.files[0];
-            var download;
             if (file !== undefined) {
-              var imgname = $('#newimg').val();
+              var numberRandom = Math.floor(Math.random() * 1001);
+              var imgname = numberRandom;
               var storageRef = firebase.storage().ref();
               var uploadTask = storageRef.child('PhotoStates/' + imgname).put(file);
+              userState.newPhoto = true;
+      
               uploadTask.on('state_changed',
                 function(snapshot) {
-                  // progreso
+                  var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                  console.log('Upload is ' + progress + '% done');      
+                  $('#progress').html('<i class="fa fa-spinner fa-pulse"></i> <span>' + progress + '%</span>');
                 },
                 function(error) {
                   alert('Hubo un error');
                 },
                 function() {
-                  download = uploadTask.snapshot.downloadURL;
-                }
+                  var downloadURL = uploadTask.snapshot.downloadURL;
+                  userState.urlNewPhoto = downloadURL;
+                  $('#progress').html('<i class="fa fa-check" aria-hidden="true"></i> <span>100%</span>');
+                  // console.log(dataUser);
+                  var name2 = snapshot.val().name;
+                  var photo = snapshot.val().photo;
+                  var newPhoto = downloadURL;
+                  firebase.database().ref('state').push({
+                    user: name2,
+                    message: userState.message,
+                    photo: photo,
+                    newPhoto: newPhoto
+                  } 
+                  );
+                  
+                  $('#newimg').value = '';
+                });
+            } else {
+              var name2 = snapshot.val().name;
+              var photo = snapshot.val().photo;
+              firebase.database().ref('state').push({
+                user: name2,
+                message: userState.message,
+                photo: photo
+              }      
               );
             }
-
-            var name2 = snapshot.val().name;
-            var state = valTextState.val();
-            var photo = snapshot.val().photo;
-            var newPhoto = download;
-            firebase.database().ref('state').push({
-              user: name2,
-              message: state,
-              photo: photo,
-              // newPhoto: newPhoto
-            });
           });
         }
       });
@@ -193,56 +217,102 @@ function chat() {
         var name2U = element.user;
         var states = element.message;
         var photo = element.photo;
-        // var photoStates = element.newPhoto;
+        var photoStates = element.newPhoto;
 
-        var sUserCard = $('<div/>', {
-          'class': 'post col s12',
-        });
-
-        var iconPost = $('<div/>', {
-          'class': 'col s12 icon-box',
-        });
-
-        var userPhoto = $('<img>', {
-          'class': 'circle imgindex',
-          'src': photo
-        });
-
-        var conImg = $('<div/>', {
-          'class': 'col s4 m4 l2',
-        }).append(userPhoto);
-
-        var iconHeart = $('<i/>', {
-          'class': 'fa fa-heart-o turq',
-          'aria-hiden': 'true',
-          'id': 'heart'
-        });
-
-        var namePost = $('<h5/>', {
-          'class': 'turq',
-        }).text(name2U + ': ');
-
-        var post = $('<p/>', {
-          'class': 'turq',
-        }).text(states);
-
-        var conState = $('<div/>', {
-          'class': 'col s8 m8 l10',
-        });
-
-        // var photoSt = $('<img>', {
-        //   'class': 'responsive-img',
-        //   'src': photoStates
-        // });
-
-        newBox.prepend(sUserCard);
-        sUserCard.append(conImg);
-        sUserCard.append(conState);
-        conState.append(namePost);
-        // conState.append(photoSt);
-        conState.append(post);
-        conState.append(iconPost);
-        iconPost.append(iconHeart);
+        if (photoStates) {
+          $('#textarea').val('');
+          var sUserCard = $('<div/>', {
+            'class': 'post col s12',
+          });
+  
+          var iconPost = $('<div/>', {
+            'class': 'col s12 icon-box',
+          });
+  
+          var userPhoto = $('<img>', {
+            'class': 'circle imgindex',
+            'src': photo
+          });
+  
+          var conImg = $('<div/>', {
+            'class': 'col s4 m4 l2',
+          }).append(userPhoto);
+  
+          var iconHeart = $('<i/>', {
+            'class': 'fa fa-heart-o turq',
+            'aria-hiden': 'true',
+            'id': 'heart'
+          });
+  
+          var namePost = $('<h5/>', {
+            'class': 'turq',
+          }).text(name2U + ': ');
+  
+          var post = $('<p/>', {
+            'class': 'turq',
+          }).text(states);
+  
+          var conState = $('<div/>', {
+            'class': 'col s8 m8 l10',
+          });
+  
+          var photoSt = $('<img>', {
+            'class': 'responsive-img',
+            'src': photoStates
+          });
+  
+          newBox.prepend(sUserCard);
+          sUserCard.append(conImg);
+          sUserCard.append(conState);
+          conState.append(namePost);
+          conState.append(photoSt);
+          conState.append(post);
+          conState.append(iconPost);
+          iconPost.append(iconHeart);
+        } else {
+          var sUserCard = $('<div/>', {
+            'class': 'post col s12',
+          });
+  
+          var iconPost = $('<div/>', {
+            'class': 'col s12 icon-box',
+          });
+  
+          var userPhoto = $('<img>', {
+            'class': 'circle imgindex',
+            'src': photo
+          });
+  
+          var conImg = $('<div/>', {
+            'class': 'col s4 m4 l2',
+          }).append(userPhoto);
+  
+          var iconHeart = $('<i/>', {
+            'class': 'fa fa-heart-o turq',
+            'aria-hiden': 'true',
+            'id': 'heart'
+          });
+  
+          var namePost = $('<h5/>', {
+            'class': 'turq',
+          }).text(name2U + ': ');
+  
+          var post = $('<p/>', {
+            'class': 'turq',
+          }).text(states);
+  
+          var conState = $('<div/>', {
+            'class': 'col s8 m8 l10',
+          });
+  
+          newBox.prepend(sUserCard);
+          sUserCard.append(conImg);
+          sUserCard.append(conState);
+          conState.append(namePost);
+          conState.append(post);
+          conState.append(iconPost);
+          iconPost.append(iconHeart);
+        }
       });
     });
 
@@ -352,6 +422,7 @@ function settings() {
       var dataUser = null;
       firebase.database().ref('user/' + useruid + '/data').on('value', function(snapshot) {
         dataUser = snapshot.val();
+        // console.log(dataUser);
       });
 
       if ($('#new-name').val() !== '')
@@ -459,11 +530,11 @@ function profile() {
     if (user) {
       firebase.database().ref('user/' + user.uid + '/follower').on('value', function(snapshot) {
         containerContact.html('');
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         if (snapshot.val() !== null) {
           snapshot.forEach(function(elm) {
             var element = elm.val().follower;
-            console.log(element);
+            // console.log(element);
             firebase.database().ref('user/' + element + '/data').on('value', function(snapshot) {
               var follower = snapshot.val();
               var contact = follower.name;
@@ -489,12 +560,11 @@ function profile() {
                 'href': 'profile.html#' + uid,
                 'class': 'col s10',
               }).text(contact);
-              console.log(userSession.uid + '->' + uid);
+              // console.log(userSession.uid + '->' + uid);
               var ref = 'user/' + userSession.uid + '/follow/' + uid;
               firebase.database().ref(ref).on('value', function(snapshot) {
-                console.log(ref);
-                console.log(snapshot.val());
-                // Me llaman... corrige aca por que no esta consultando o que paso ya 
+                // console.log(ref);
+                // console.log(snapshot.val());
                 if (snapshot.val() !== null) {
                   buttonFollow = $('<a/>', {
                     'class': 'waves-effect waves-light btn unfollow',
