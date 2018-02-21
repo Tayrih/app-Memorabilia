@@ -22,7 +22,7 @@ $(document).ready(function() {
 			  var errorMessage = error.message;
 			  var email = error.email;
 			  var credential = error.credential;
-
+        console.log(error);
 			  if (errorCode === 'auth/account-exists-with-different-credential') {
 			  	alert('Es el mismo usuario');
 			  }
@@ -63,11 +63,11 @@ $(document).ready(function() {
   $('#btn-google').on('click', loginGoogle);
   $('#btn-fb').on('click', loginFacebook);
 
-  // esta parte detectara si hay un usuario ya logueado y nos redigira a index
+  // detecta si hay un usuario ya logueado y nos redigira a index
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      window.location.href = '../index.html';
+      // window.location.href = '../index.html';
     }
   });
 });
@@ -77,7 +77,7 @@ function initFirebase(usuario) {
     if (user) {
       var uid = user.uid;
       userConect = firebase.database().ref('/user/' + usuario.uid + '/data');
-      // console.log(user);
+      console.log(user);
       firebase.database().ref('/user/' + usuario.uid + '/data').on('value', function(snapshot) {
         console.log(snapshot.val());
         if (snapshot.val() !== null) {
@@ -87,7 +87,9 @@ function initFirebase(usuario) {
           }
         } else {
           // conecto a la base de datos creo la referencia user y llamo a addUserDb
+          console.log('usuario nuevo' + usuario.uid + user.displayName + user.photoURL);
           addUserDb(usuario.uid, user.displayName, user.photoURL);
+          window.location.href = '../index.html'; // Por si acaso
         }
       });
     }
@@ -95,13 +97,14 @@ function initFirebase(usuario) {
 }
 // obtiene uid y name
 
-
 function addUserDb(uid, name, photo) {
+  userConect = firebase.database().ref('/user/' + uid + '/data');
   var conect = userConect.set({
     uid: uid,
     name: name,
     photo: photo
   });
+  // console.log("Usuario nuevo REGISTRADO");
 
   window.location.href = '../index.html';
 }

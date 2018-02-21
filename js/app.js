@@ -90,13 +90,15 @@ function chat() {
         firebase.database().ref('user/' + user.uid + '/data').on('value', function(snapshot) {
           if (user) {
             var name = snapshot.val().name;
-            var msg = valTextChat.val();
             var photo = snapshot.val().photo;
-            firebase.database().ref('chat').push({
-              photo: photo,
-              name: name,
-              message: msg
-            });
+            var msg = valTextChat.val();
+            if (msg !== '') {
+              firebase.database().ref('chat').push({
+                photo: photo,
+                name: name,
+                message: msg
+              });
+            }
           }
         });
       });
@@ -111,11 +113,13 @@ function chat() {
               var name = snapshot.val().name;
               var msg = valTextChat.val();
               var photo = snapshot.val().photo;
-              firebase.database().ref('chat').push({
-                photo: photo,
-                name: name,
-                message: msg
-              });
+              if (msg !== '') {
+                firebase.database().ref('chat').push({
+                  photo: photo,
+                  name: name,
+                  message: msg
+                });
+              }
             }
           });
         });
@@ -132,11 +136,28 @@ function chat() {
         var txtName = element.name;
         var txtMsg = element.message;
 
-        var tName = $('<p/>', {
-          'class': 'li',
-        }).text(txtName + ': ' + txtMsg);
+        var iconUser = $('<img>', {
+          'src': 'assets/icons/user.png'
+        });
 
-        contChat.append(tName);
+        var containerIconChat = $('<div/>', {
+          'class': 'col s3 l2',
+        }).append(iconUser);
+
+        var getName = $('<h5/>', {
+          'class': 'chat-msg',
+        }).text(txtName + ': ');
+
+        var containerMsg = $('<div/>', {
+          'class': 'col s7',
+        }).append(getName);
+
+        var getmsg = $('<p/>', {
+          'class': 'li',
+        }).text(txtMsg);
+        contChat.append(containerIconChat);
+        contChat.append(getName);
+        contChat.append(getmsg);
         $('#cht_log_email').val('');
       });
     });
@@ -156,6 +177,8 @@ function chat() {
       
             if ($('#textarea').val() !== '')
               userState.message = $('#textarea').val();
+            else
+              swal('Agregue un comentario antes de publicar', '-', 'error');
       
             var fichero = document.getElementById('newimg');
             var file = fichero.files[0];
@@ -173,7 +196,7 @@ function chat() {
                   $('#progress').html('<i class="fa fa-spinner fa-pulse"></i> <span>' + progress + '%</span>');
                 },
                 function(error) {
-                  alert('Hubo un error');
+                  swal('Hubo un error', 'You clicked the button!', 'error');
                 },
                 function() {
                   var downloadURL = uploadTask.snapshot.downloadURL;
@@ -191,7 +214,7 @@ function chat() {
                   } 
                   );
                   
-                  $('#newimg').value = '';
+                  $('#newimg').val('');
                 });
             } else {
               var name2 = snapshot.val().name;
@@ -333,7 +356,7 @@ function chat() {
                   'class': 'waves-effect waves-light btn unfollow',
                   'data-id': uid,
                   'data-user': user.uid,
-                }).text('Dejar de Seguir');
+                }).text('Siguiendo');
               } else {
                 buttonFollow = $('<a/>', {
                   'class': 'waves-effect waves-light btn follow',
@@ -399,7 +422,7 @@ function chat() {
     });
   });
 }
-// obtiene lista de seguidores 
+// configuracion de usuario
 function settings() {
   $(document).ready(function() {
     // settings
@@ -464,7 +487,8 @@ function settings() {
         update['/user/' + useruid + '/data'] = dataUser;
 
         firebase.database().ref().update(update);
-        alert('Datos actualizados');
+        // alert('Datos actualizados');
+        swal('Datos Actualizados!', 'success');
       }
     });
 
@@ -570,7 +594,7 @@ function profile() {
                     'class': 'waves-effect waves-light btn unfollow',
                     'data-id': uid,
                     'data-user': user.uid,
-                  }).text('Dejar de Seguir');
+                  }).text('Siguiendo');
                 } else {
                   buttonFollow = $('<a/>', {
                     'class': 'waves-effect waves-light btn follow',
@@ -581,7 +605,7 @@ function profile() {
 
                 $('#box-contact' + uid).append(buttonFollow);
                 $('.follow').on('click', function() {
-                  console.log('Siguiendo a ' + $(this).data('id'));
+                  // console.log('Siguiendo a ' + $(this).data('id'));
                   var follow = $(this).data('id');
                   var user = $(this).data('user');
 

@@ -7,6 +7,14 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+h5 {
+  font-size: 1.3rem;
+}
+
+#contact a {
+  font-size: 1.25rem;
+}
+
 .white-color {
   color: var(--color2);
 }
